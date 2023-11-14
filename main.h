@@ -4,6 +4,22 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * struct FormatSpecifier - Represents a format specifier and its handler.
+ * @specifier: The format specifier character (e.g., 'c', 's', 'd', etc.).
+ * @handler: Pointer to the function that handles printing for this specifier.
+ *
+ * Description:
+ * This structure associates a format specifier character 
+ *	with its corresponding
+ * handler function. It is used to organize and
+ *	manage different format specifiers
+ * in a custom printf-style function.
+ */
 
 typedef struct FormatSpecifier
 {
@@ -21,4 +37,9 @@ int print_str(va_list args);
 
 int print_percent(va_list args);
 
+int print_decimal(va_list args);
+
+int print_integer(va_list args);
+
+int print_positive_integer(int value);
 #endif /* MAIN_H */

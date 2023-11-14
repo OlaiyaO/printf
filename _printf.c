@@ -1,11 +1,11 @@
-
 #include "main.h"
 
 /**
- * _printf - Custom printf function
- * @format: Format string
+ * _printf - Prints formatted text to stdout.
+ * @format: The format string containing format specifiers.
+ *          Supported specifiers: %c, %s, %%, %d, %i.
  *
- * Return: Number of characters printed (excluding null byte)
+ * Return: The number of characters printed (excluding null byte).
  */
 
 int _printf(const char *format, ...)
@@ -14,9 +14,10 @@ int _printf(const char *format, ...)
 		{'c', print_char},
 		{'s', print_str},
 		{'%', print_percent},
+		{'d', print_decimal},
+		{'i', print_integer},
 		{'\0', NULL}
 	};
-
 	int count = 0, i = 0;
 	va_list args;
 
@@ -37,7 +38,6 @@ int _printf(const char *format, ...)
 				}
 				i++;
 			}
-
 			if (specifiers[i].specifier == '\0')
 				count += (write(1, "%", 1) + (format ? write(1, format, 1) : 0));
 		}
@@ -50,4 +50,4 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 	return (count);
-}           
+}
