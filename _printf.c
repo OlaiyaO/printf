@@ -58,7 +58,7 @@ int handle_specifier(char specifier, va_list args)
 		{'i', print_integer},
 		{'\0', NULL}
 	};
-	int i = 0, count = 0;
+	int i = 0;
 
 	while (specifiers[i].specifier != '\0')
 	{
@@ -66,6 +66,7 @@ int handle_specifier(char specifier, va_list args)
 			return (specifiers[i].handler(args));
 		i++;
 	}
-	count += write(1, &specifier, 1);
-	return (count);
+	write(1, "%", 1);
+	write(1, &specifier, 1);
+	return (2);
 }
