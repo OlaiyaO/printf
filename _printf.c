@@ -66,10 +66,6 @@ int handle_specifier(char specifier, va_list args)
 			return (specifiers[i].handler(args));
 		i++;
 	}
-	if (specifier == 's')
-		count = print_str(args);
-	else if (specifiers[i].specifier != '\0')
-		count += write(1, &specifier, 1);
-
+	count += write(1, &specifier, 1);
 	return (count);
 }
