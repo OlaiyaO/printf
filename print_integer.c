@@ -1,52 +1,49 @@
 #include "main.h"
 
 /**
- * print_integer - Print an integer value.
- * @args: va_list containing the argument.
+ * print_integer - Prints an integer.
+ * @args: The va_list of arguments.
  *
  * Return: Number of characters printed.
  */
 
 int print_integer(va_list args)
 {
-	int value = va_arg(args, int);
-	int count = 0;
+	int input_num = va_arg(args, int);
+	int temp_num, last_digit = input_num % 10, current_digit, exp = 1;
+	int char_count = 1;
 
-	if (value == 0)
+	input_num = input_num / 10;
+	temp_num = input_num;
+
+	if (last_digit < 0)
 	{
-		write(1, "0", 1);
-		return (1);
+		_putchar('-');
+		temp_num = -temp_num;
+		input_num = -input_num;
+		last_digit = -last_digit;
+		char_count++;
 	}
 
-	count += print_positive_integer(value);
-
-	return (count);
-}
-
-/**
- * print_positive_integer - Print the positive part of an integer value.
- * @value: The positive integer value to print.
- *
- * Return: Number of characters printed.
- */
-
-int print_positive_integer(int value)
-{
-	int count = 0;
-	int divisor = 1;
-
-	while (value / divisor > 9)
-		divisor *= 10;
-
-	while (divisor != 0)
+	if (temp_num > 0)
 	{
-		char digit = '0' + value / divisor;
+		while (temp_num / 10 != 0)
+		{
+			exp = exp * 10;
+			temp_num = temp_num / 10;
+		}
 
-		write(1, &digit, 1);
-		count++;
-		value %= divisor;
-		divisor /= 10;
+		temp_num = input_num;
+
+		while (exp > 0)
+		{
+			current_digit = temp_num / exp;
+			_putchar(current_digit + '0');
+			temp_num = temp_num - (current_digit * exp);
+			exp = exp / 10;
+			char_count++;
+		}
 	}
-
-	return (count);
+	_putchar(last_digit + '0');
+	return (char_count);
 }

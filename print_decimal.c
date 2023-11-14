@@ -1,51 +1,50 @@
 #include "main.h"
 
 /**
- * print_decimal - Prints a decimal (int) number.
- * @args: A va_list containing the argument to print.
+ * print_decimal - Prints a decimal number.
+ * @args: The va_list of arguments.
  *
- * Return: The number of characters printed.
+ * Return: Number of characters printed.
  */
 
 int print_decimal(va_list args)
 {
-	int num = va_arg(args, int);
-	int count = 0, i;
-	char *buffer;
+	int input_num = va_arg(args, int);
+	int temp_num, last_digit = input_num % 10, current_digit;
+	int char_count = 1;
+	int exp = 1;
 
-	if (num < 0)
+	input_num = input_num / 10;
+	temp_num = input_num;
+
+	if (last_digit < 0)
 	{
-		count += write(1, "-", 1);
-		num = -num;
+		_putchar('-');
+		temp_num = -temp_num;
+		input_num = -input_num;
+		last_digit = -last_digit;
+		char_count++;
 	}
 
-	if (num == 0)
+	if (temp_num > 0)
 	{
-		count += write(1, "0", 1);
-	}
-	else
-	{
-		int num_digits = 0;
-		int temp = num;
-
-		while (temp > 0)
+		while (temp_num / 10 != 0)
 		{
-			temp /= 10;
-			num_digits++;
+			exp = exp * 10;
+			temp_num = temp_num / 10;
 		}
 
-		buffer = malloc(num_digits);
-		if (buffer == NULL)
-			return (-1);
+		temp_num = input_num;
 
-		for (i = num_digits - 1; i >= 0; i--)
+		while (exp > 0)
 		{
-			buffer[i] = num % 10 + '0';
-			num /= 10;
+			current_digit = temp_num / exp;
+			_putchar(current_digit + '0');
+			temp_num = temp_num - (current_digit * exp);
+			exp = exp / 10;
+			char_count++;
 		}
-
-		count += write(1, buffer, num_digits);
-		free(buffer);
 	}
-	return (count);
+	_putchar(last_digit + '0');
+	return (char_count);
 }
