@@ -58,7 +58,7 @@ int handle_specifier(char specifier, va_list args)
 		{'i', print_integer},
 		{'\0', NULL}
 	};
-	int i = 0;
+	int i = 0, count = 0;
 
 	while (specifiers[i].specifier != '\0')
 	{
@@ -66,5 +66,10 @@ int handle_specifier(char specifier, va_list args)
 			return (specifiers[i].handler(args));
 		i++;
 	}
-	return (write(1, &specifier, 1));
+	if (specifier == 's')
+		count += print_str(args);
+	else if (specifiers[i].specifier == '\0')
+		count += write(1, &specifier, 1);
+
+	return (count);
 }
