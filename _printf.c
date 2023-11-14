@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * _printf - Prints formatted text to stdout.
- * @format: The format string containing format specifiers.
+ * _printf - Custom printf function
+ * @format: Format string
  *
- * Return: The number of characters printed (excluding null byte).
+ * Return: Number of characters printed (excluding null byte)
  */
 
 int _printf(const char *format, ...)
@@ -16,6 +16,7 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(args, format);
+
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -23,52 +24,19 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '\0')
 			{
-				count += (write(1, "%", 1));
+				count += write(1, "%", 1);
 				break;
 			}
 			count += handle_specifier(*format, args);
 		}
 		else
 		{
-			count += (write(1, format, 1));
+			count += write(1, format, 1);
 		}
 		format++;
 	}
+
 	va_end(args);
-
-	return (count);
-}
-
-/**
- * parse_format - Parses and processes the format string.
- * @format: The format string.
- * @args: The va_list of arguments.
- *
- * Return: The number of characters printed (excluding null byte).
- */
-
-int parse_format(const char *format, va_list args)
-{
-	int count = 0;
-
-	while (*format != '\0')
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == '\0')
-			{
-				count += (write(1, "%", 1));
-				break;
-			}
-			count += handle_specifier(*format, args);
-		}
-		else
-		{
-			count += (write(1, format, 1));
-		}
-		format++;
-	}
 	return (count);
 }
 
