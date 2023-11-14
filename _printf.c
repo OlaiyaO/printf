@@ -56,6 +56,7 @@ int handle_specifier(char specifier, va_list args)
 		{'%', print_percent},
 		{'d', print_decimal},
 		{'i', print_integer},
+		{'b', print_binary},
 		{'\0', NULL}
 	};
 	int i = 0;
