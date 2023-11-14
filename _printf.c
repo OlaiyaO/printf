@@ -1,50 +1,53 @@
-#include "main.h" 
 
-/** 
- * _printf - Custom printf function 
- * @format: Format string 
- * 
- * Return: Number of characters printed (excluding null byte) 
- */ 
-int _printf(const char *format, ...) 
-{ 
-	FormatSpecifier specifiers[] = { 
-		{'c', print_char}, 
-		{'s', print_str}, 
-		{'%', print_percent}, 
-		{'\0', NULL} 
-	}; 
+#include "main.h"
 
-	int count = 0, i = 0; 
-	va_list args; 
+/**
+ * _printf - Custom printf function
+ * @format: Format string
+ *
+ * Return: Number of characters printed (excluding null byte)
+ */
 
-	va_start(args, format); 
+int _printf(const char *format, ...)
+{
+	FormatSpecifier specifiers[] = {
+		{'c', print_char},
+		{'s', print_str},
+		{'%', print_percent},
+		{'\0', NULL}
+	};
 
-	while (*format != '\0') 
-	{ 
-		if (*format == '%') 
-		{ 
-			format++; 
+	int count = 0, i = 0;
+	va_list args;
 
-			while (specifiers[i].specifier != '\0') 
-			{ 
-				if (*format == specifiers[i].specifier) 
-				{ 
-					count += specifiers[i].handler(args); 
-					break; 
-				} 
-				i++; 
-			} 
+	va_start(args, format);
 
-			if (specifiers[i].specifier == '\0') 
-				count += (write(1, "%", 1) + (format ? write(1, format, 1) : 0)); 
-		} 
-		else 
-		{ 
-			count += write(1, format, 1); 
-		} 
-		format++; 
-	} 
-	va_end(args); 
-	return (count); 
-}
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+
+			while (specifiers[i].specifier != '\0')
+			{
+				if (*format == specifiers[i].specifier)
+				{
+					count += specifiers[i].handler(args);
+					break;
+				}
+				i++;
+			}
+
+			if (specifiers[i].specifier == '\0')
+				count += (write(1, "%", 1) + (format ? write(1, format, 1) : 0));
+		}
+		else
+		{
+			count += write(1, format, 1);
+		}
+		format++;
+		i = 0;
+	}
+	va_end(args);
+	return (count);
+}           
