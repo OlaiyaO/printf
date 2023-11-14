@@ -42,4 +42,8 @@ int print_decimal(va_list args);
 int print_integer(va_list args);
 
 int print_positive_integer(int value);
+
+int handle_specifier(char specifier, va_list args);
+
+int parse_format(const char *format, va_list args);
 #endif /* MAIN_H */
