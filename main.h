@@ -49,4 +49,16 @@ int handle_specifier(char specifier, va_list args);
 int parse_format(const char *format, va_list args);
 
 int print_binary(va_list args);
+
+int print_number(unsigned int n, int base);
+
+int print_number_hex(unsigned int n, int uppercase);
+
+int print_unsigned(va_list args);
+
+int print_octal(va_list args);
+
+int print_hex(va_list args);
+
+int print_HEX(va_list args);
 #endif /* MAIN_H */
