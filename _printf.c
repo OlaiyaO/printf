@@ -11,11 +11,29 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int count = 0;
-	
+
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
+
 	va_start(args, format);
-	count = parse_format(format, args);
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == '\0')
+			{
+				count += (write(1, "%", 1));
+				break;
+			}
+			count += handle_specifier(*format, args);
+		}
+		else
+		{
+			count += (write(1, format, 1));
+		}
+		format++;
+	}
 	va_end(args);
 
 	return (count);
@@ -40,14 +58,14 @@ int parse_format(const char *format, va_list args)
 			format++;
 			if (*format == '\0')
 			{
-				count += write(1, "%", 1);
+				count += (write(1, "%", 1));
 				break;
 			}
 			count += handle_specifier(*format, args);
 		}
 		else
 		{
-			count += write(1, format, 1);
+			count += (write(1, format, 1));
 		}
 		format++;
 	}
@@ -82,4 +100,3 @@ int handle_specifier(char specifier, va_list args)
 	}
 	return (write(1, &specifier, 1));
 }
-
