@@ -15,7 +15,7 @@
  * @handler: Pointer to the function that handles printing for this specifier.
  *
  * Description:
- * This structure associates a format specifier character 
+ * This structure associates a format specifier character
  *	with its corresponding
  * handler function. It is used to organize and
  *	manage different format specifiers
@@ -61,4 +61,6 @@ int print_octal(va_list args);
 int print_hex(va_list args);
 
 int print_HEX(va_list args);
+
+int print_string_with_non_printable(va_list args);
 #endif /* MAIN_H */

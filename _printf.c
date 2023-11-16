@@ -51,16 +51,12 @@ int _printf(const char *format, ...)
 int handle_specifier(char specifier, va_list args)
 {
 	FormatSpecifier specifiers[] = {
-		{'c', print_char},
-		{'s', print_str},
-		{'%', print_percent},
-		{'d', print_decimal},
-		{'i', print_integer},
-		{'b', print_binary},
-		{'u', print_unsigned},
-		{'o', print_octal},
-		{'x', print_hex},
-		{'X', print_HEX},
+		{'c', print_char}, {'s', print_str},
+		{'%', print_percent}, {'d', print_decimal},
+		{'i', print_integer}, {'b', print_binary},
+		{'u', print_unsigned}, {'o', print_octal},
+		{'x', print_hex}, {'X', print_HEX},
+		{'S', print_string_with_non_printable},
 		{'\0', NULL}
 	};
 	int i = 0;
