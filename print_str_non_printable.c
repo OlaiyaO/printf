@@ -47,8 +47,5 @@ int print_string_with_non_printable(va_list args)
 		}
 		str++;
 	}
-
-	_putchar('\n');
-	count++;
 	return (count);
 }
