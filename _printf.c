@@ -57,6 +57,7 @@ int handle_specifier(char specifier, va_list args)
 		{'u', print_unsigned}, {'o', print_octal},
 		{'x', print_hex}, {'X', print_HEX},
 		{'S', print_string_with_non_printable},
+		{'p', print_pointer},
 		{'\0', NULL}
 	};
 	int i = 0;
