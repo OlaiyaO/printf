@@ -25,7 +25,7 @@ int print_pointer(va_list val)
 	{
 		count += _putchar('0');
 		count += _putchar('x');
-		count += print_number_hex((unsigned long int)p, 0);
+		count += print_number_hex((unsigned int)((uintptr_t)p), 0);
 	}
 
 	return (count);

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <stdint.h>
 
 /**
  * struct FormatSpecifier - Represents a format specifier and its handler.
@@ -63,8 +64,6 @@ int print_hex(va_list args);
 int print_HEX(va_list args);
 
 int print_string_with_non_printable(va_list args);
-
-int print_pointer(va_list args);
 
 int print_pointer(va_list args);
 #endif /* MAIN_H */
