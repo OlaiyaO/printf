@@ -10,23 +10,35 @@
 int print_pointer(va_list args)
 {
 	void *p = va_arg(args, void*);
-	char *nil_str = "(nil)";
-	int count = 0, i;
+	int i;
 
 	if (p == NULL)
 	{
-		for (i = 0; nil_str[i] != '\0'; i++)
-		{
-			_putchar(nil_str[i]);
-			count++;
-		}
+		return (write(1, "(nil)", 5));
 	}
 	else
 	{
-		count += _putchar('0');
-		count += _putchar('x');
-		count += print_number_hex((unsigned long int)p, 0);
-	}
+		unsigned long int address = (unsigned long int)p;
 
-	return (count);
+		int count = write(1, "0x", 2);
+
+		int digits = 0;
+		unsigned long int temp = address;
+
+		while (temp != 0)
+		{
+			temp /= 16;
+			digits++;
+		}
+
+		for (i = digits - 1; i >= 0; i--)
+		{
+			int digit = (address >> (4 * i)) & 0xF;
+			char hex_digit = (digit < 10) ? digit + '0' : digit - 10 + 'a';
+
+			count += write(1, &hex_digit, 1);
+		}
+
+		return (count);
+	}
 }
