@@ -14,13 +14,20 @@ int print_pointer(va_list args)
 
 	if (ptr == NULL)
 	{
-		count += write(1, "(nil)", 5);
+		count += write(1, "0x0", 3);
 	}
 	else
 	{
 		count += _putchar('0');
 		count += _putchar('x');
-		count += print_number_hex((unsigned long)ptr, 0);
+		if ((long)ptr < 0)
+		{
+			count += print_number((unsigned long)((long)ptr), 16);
+		}
+		else
+		{
+			count += print_number_hex((unsigned long)ptr, 0);
+		}
 	}
 
 	return (count);
