@@ -11,23 +11,22 @@ int print_pointer(va_list val)
 {
 	void *p = va_arg(val, void*);
 	char *nil_str = "(nil)";
-	int count;
+	int count = 0, i;
 
 	if (p == NULL)
 	{
-		int i;
-
 		for (i = 0; nil_str[i] != '\0'; i++)
 		{
 			_putchar(nil_str[i]);
+			count++;
 		}
-		return (i);
+	}
+	else
+	{
+		count += _putchar('0');
+		count += _putchar('x');
+		count += print_number_hex((unsigned long int)p, 0);
 	}
 
-	_putchar('0');
-	_putchar('x');
-
-	count = print_number_hex((unsigned long int)p, 0);
-
-	return (count + 2);
+	return (count);
 }
