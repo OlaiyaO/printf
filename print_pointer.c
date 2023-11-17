@@ -2,7 +2,7 @@
 
 /**
  * print_pointer - Handles %p specifier (print pointer address).
- * @val: Variable arguments list
+ * @args: Variable arguments list
  *
  * Return: Number of characters printed (excluding null byte)
  */
